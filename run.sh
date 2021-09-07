@@ -9,6 +9,7 @@ cd openwrt
 # 更新 Feeds
 ./scripts/feeds update -a
 ./scripts/feeds install -a
+./scripts/feeds install -a
 
 ### 获取额外的 LuCI 应用、主题和依赖 ###
 
