@@ -6,6 +6,10 @@ git clone --depth 1 -b v21.02.0 https://github.com/openwrt/openwrt openwrt
 #切换到openwrt目录
 cd openwrt 
 
+# 更新 Feeds
+./scripts/feeds update -a
+./scripts/feeds install -a
+
 ### 获取额外的 LuCI 应用、主题和依赖 ###
 
 # ChinaDNS
