@@ -97,3 +97,8 @@ done
 
 # Script for creating ACL file for each LuCI APP
 bash ../create_acl_for_luci.sh -a
+
+#copy config
+cp ../config_erx .config
+make defconfig
+echo "Ready to run make"
