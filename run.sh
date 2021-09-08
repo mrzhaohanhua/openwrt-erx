@@ -2,9 +2,9 @@
 clear
 
 #获取openwrt
-git clone --depth 1 -b v21.02.0 https://github.com/openwrt/openwrt openwrt
+git clone --depth 1 -b v21.02.0 https://github.com/openwrt/openwrt openwrt-v21.02.0
 #切换到openwrt目录
-cd openwrt 
+cd openwrt-v21.02.0
 
 # 更新 Feeds
 ./scripts/feeds update -a
