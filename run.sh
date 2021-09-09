@@ -99,6 +99,8 @@ done
 bash ../create_acl_for_luci.sh -a
 
 #copy config
+echo ".config file copied"
 cp ../config_erx .config
+echo ""
 make defconfig
 echo "Ready to run make"
