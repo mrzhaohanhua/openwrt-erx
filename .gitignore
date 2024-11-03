@@ -1,1 +1,4 @@
-openwrt*/
+openwrt/
+openwrt_snap/
+openwrt_release/
+openwrt-package/
