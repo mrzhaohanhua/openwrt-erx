@@ -9,30 +9,6 @@ my_package_repo="https://github.com/mrzhaohanhua/openwrt-package"
 extra_package_path="./package/extra"
 
 # 定义函数
-checkout_code(){
-    repo_url=$1
-    source_dir=$2
-    dest_dir=$3      
-    branch_or_tag=$4
-
-    if [ -z "$branch_or_tag" ]; then
-        branch_path="trunk"
-    elif [ "$branch_or_tag" = "tag" ]; then
-        branch_path="tags/$5"
-    elif [ "$branch_or_tag" = "branch" ]; then
-        branch_path="branches/$5"
-    else
-        echo "branch or tag name error."
-        exit 1
-    fi
-    svn export $repo_url/$branch_path/$source_dir $dest_dir
-    if [ $? -ne 0 ]; then
-        echo "svn export $repo_url/$branch_path/$source_dir $dest_dir"
-        echo "执行错误"
-        exit 1
-    fi
-}
-
 copy_package(){
   source_dir=$1
   dest_dir=$2
@@ -120,7 +96,17 @@ git clone -b master --depth 1 https://github.com/NateLol/luci-app-oled.git ${ext
 copy_package luci-app-passwall ${extra_package_path}/luci-app-passwall
 
 # 修改luci-app-passwall中的Makefile以支持最新的iptables
-sed -i 's,iptables-legacy,iptables-nft,g' ${extra_package_path}/luci-app-passwall/Makefile
+# sed -i 's,iptables-legacy,iptables-nft,g' ${extra_package_path}/luci-app-passwall/Makefile
+
+# 替换 Xray-core
+rm -rf feeds/packages/net/xray-core
+copy_package xray-core feeds/packages/net/xray-core
+
+# 替换 v2ray-core
+rm -rf feeds/packages/net/v2ray-core
+copy_package v2ray-core feeds/packages/net/v2ray-core
+rm -rf feeds/packages/net/v2ray-geodata
+copy_package v2ray-geodata feeds/packages/net/v2ray-geodata
 
 # Passwall的依赖包
 copy_package ipt2socks ${extra_package_path}/ipt2socks
@@ -138,12 +124,9 @@ copy_package trojan-go ${extra_package_path}/trojan-go
 copy_package brook ${extra_package_path}/brook
 copy_package trojan-plus ${extra_package_path}/trojan-plus
 copy_package ssocks ${extra_package_path}/ssocks
-copy_package xray-core ${extra_package_path}/xray-core
 copy_package v2ray-plugin ${extra_package_path}/v2ray-plugin
 copy_package xray-plugin ${extra_package_path}/xray-plugin
 copy_package hysteria ${extra_package_path}/hysteria
-copy_package v2ray-core ${extra_package_path}/v2ray-core
-copy_package v2ray-geodata ${extra_package_path}/v2ray-geodata
 copy_package tuic-client ${extra_package_path}/tuic-client
 
 # KMS 激活助手
