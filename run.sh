@@ -69,6 +69,9 @@ copy_package tools/ucl tools/ucl
 copy_package tools/upx tools/upx
 
 ### 获取额外的 LuCI 应用、主题和依赖 ###
+# 更换 frp
+rm -rf feeds/package/net/frp
+copy_package frp feeds/package/net/frp
 
 # 更换smartdns
 rm -rf feeds/packages/net/smartdns
