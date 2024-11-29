@@ -5,7 +5,7 @@ openwrt_version_code="v23.05.5"
 lede_version_code="20230609"
 openwrt_repo="https://github.com/openwrt/openwrt"
 lede_repo="https://github.com/coolsnowwolf/lede"
-my_package_repo="https://github.com/mrzhaohanhua/openwrt-package"
+my_package_repo="https://github.com/mrzhaohanhua/openwrt-packages"
 extra_package_path="./package/extra"
 
 # 定义函数
@@ -13,9 +13,9 @@ copy_package(){
   source_dir=$1
   dest_dir=$2
   mkdir -p $dest_dir
-  cp -rf ../openwrt-package/$source_dir/* $dest_dir/
+  cp -rf ../openwrt-packages/$source_dir/* $dest_dir/
       if [ $? -ne 0 ]; then
-        echo "cp -rf ../openwrt-package/$source_dir $dest_dir"
+        echo "cp -rf ../openwrt-packages/$source_dir $dest_dir"
         echo "执行错误"
         exit 1
     fi
@@ -24,8 +24,8 @@ copy_package(){
 ### 清理 ###
 echo "清理 ./openwrt/"
 rm -rf openwrt
-echo "清理 ./openwrt-package/"
-rm -rf openwrt-package
+echo "清理 ./openwrt-packages/"
+rm -rf openwrt-packages
 
 echo "签出 OpenWRT $openwrt_version_code"
 
@@ -36,11 +36,11 @@ else
 	exit 1
 fi
 
-echo "签出 openwrt-package"
-if git clone --depth 1 $my_package_repo openwrt-package; then
-	echo "签出 openwrt-package 成功."
+echo "签出 openwrt-packages"
+if git clone --depth 1 $my_package_repo openwrt-packages; then
+	echo "签出 openwrt-packages 成功."
 else
-	echo "签出 openwrt-package 失败."
+	echo "签出 openwrt-packages 失败."
 	exit 1
 fi
 
